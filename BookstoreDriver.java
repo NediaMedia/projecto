@@ -270,9 +270,9 @@ public class BookstoreDriver {
 
     private static void compareProducts(Bookstore bookstore, Scanner scnr) {
     System.out.println("Enter the ID of the first product:");
-    int id1 = scnr.nextInt();
+    int id1 = scnr.nextInt() - 1; 
     System.out.println("Enter the ID of the second product:");
-    int id2 = scnr.nextInt();
+    int id2 = scnr.nextInt() - 1; 
 
     Product product1 = bookstore.getProductById(id1);
     Product product2 = bookstore.getProductById(id2);
@@ -284,13 +284,14 @@ public class BookstoreDriver {
 
     int comparison = product1.compareTo(product2);
     if (comparison < 0) {
-        System.out.println("Product " + id1 + " is less than product " + id2);
+        System.out.println("Product " + (id1 + 1) + " is less than product " + (id2 + 1));
     } else if (comparison > 0) {
-        System.out.println("Product " + id1 + " is greater than product " + id2);
+        System.out.println("Product " + (id1 + 1) + " is greater than product " + (id2 + 1));
     } else {
-        System.out.println("Product " + id1 + " is equal to product " + id2);
+        System.out.println("Product " + (id1 + 1) + " is equal to product " + (id2 + 1));
     }
 }
+
 
 private static void restockProduct(Bookstore bookstore, Scanner scnr) {
     System.out.println("Enter the ID of the product to restock:");
