@@ -196,7 +196,7 @@ public class Bookstore {
         }
     }
 
-    @Override
+    
     public void restockProduct(int productId, int quantity) {
         // Assuming productId is the index in the combined inventory list
         int totalSize = bookInventory.size() + cdInventory.size() + dvdInventory.size();
@@ -217,7 +217,7 @@ public class Bookstore {
         }
     }
 
-    @Override
+    
     public double inventoryValue() {
         double totalValue = 0.0;
 
