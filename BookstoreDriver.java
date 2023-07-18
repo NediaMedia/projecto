@@ -29,29 +29,37 @@ public class BookstoreDriver {
             System.out.println("\t1. Make a purchase");
             System.out.println("\t2. Register as a new member.");
             System.out.println("\t3. Check membership status.");
-            System.out.println("\t4. Exit");
+            System.out.println("\t4. Compare two products.");
+            System.out.println("\t5. Restock a product.");
+            System.out.println("\t6. Display total inventory value.");
+            System.out.println("\t7. Exit");
 
             int choice = scnr.nextInt();
 
             switch (choice) {
                 case 1:
-                    System.out.println("-----------------------------------");
                     purchase(bookstore, scnr, new ArrayList<String>());
                     break;
                 case 2:
-                    System.out.println("-----------------------------------");
                     registerNewMember(bookstore, scnr, 0);
                     break;
                 case 3:
-                    System.out.println("-----------------------------------");
                     checkMemberStatus(bookstore, scnr);
                     break;
                 case 4:
+                    compareProducts(bookstore, scnr);
+                    break;
+                case 5:
+                    restockProduct(bookstore, scnr);
+                    break;
+                case 6:
+                    System.out.println("Total inventory value: " + bookstore.inventoryValue());
+                    break;
+                case 7:
                     run = false;
                     System.out.println("Thank you for shopping at our store. Come back soon!");
                     break;
                 default:
-                    System.out.println("-----------------------------------");
                     System.out.println("Invalid input, try again.");
             }
         }
@@ -259,4 +267,39 @@ public class BookstoreDriver {
         }
         return total;
     }
+
+    private static void compareProducts(Bookstore bookstore, Scanner scnr) {
+    System.out.println("Enter the ID of the first product:");
+    int id1 = scnr.nextInt();
+    System.out.println("Enter the ID of the second product:");
+    int id2 = scnr.nextInt();
+
+    Product product1 = bookstore.getProductById(id1);
+    Product product2 = bookstore.getProductById(id2);
+
+    if (product1 == null || product2 == null) {
+        System.out.println("One or both product IDs are invalid.");
+        return;
+    }
+
+    int comparison = product1.compareTo(product2);
+    if (comparison < 0) {
+        System.out.println("Product " + id1 + " is less than product " + id2);
+    } else if (comparison > 0) {
+        System.out.println("Product " + id1 + " is greater than product " + id2);
+    } else {
+        System.out.println("Product " + id1 + " is equal to product " + id2);
+    }
+}
+
+private static void restockProduct(Bookstore bookstore, Scanner scnr) {
+    System.out.println("Enter the ID of the product to restock:");
+    int id = scnr.nextInt();
+    System.out.println("Enter the quantity to add:");
+    int quantity = scnr.nextInt();
+
+    bookstore.restockProduct(id, quantity);
+    System.out.println("Product " + id + " has been restocked with " + quantity + " units.");
+}
+
 }
